@@ -13,8 +13,8 @@ const Index = () => {
     setIsLoaded(true);
   }, []);
   
-  // State for result section visibility - this will be controlled by search submission
-  const [showResults, setShowResults] = useState(true); // Set to true to show the results section for testing
+  // State for result section visibility - controlled by search submission
+  const [showResults, setShowResults] = useState(false);
   
   return (
     <div className={`min-h-screen flex flex-col ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
@@ -24,7 +24,7 @@ const Index = () => {
         {/* Hero Section with Background Gradient */}
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-b from-culinary-cream/80 to-white pointer-events-none" />
-          <SearchSection />
+          <SearchSection onSearchComplete={() => setShowResults(true)} />
         </div>
         
         <InstructionSection />

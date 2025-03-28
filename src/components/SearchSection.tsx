@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import axios from "axios";
@@ -6,7 +7,11 @@ interface SearchResponse {
   reply: string;
 }
 
-const SearchSection = () => {
+interface SearchSectionProps {
+  onSearchComplete?: () => void;
+}
+
+const SearchSection = ({ onSearchComplete }: SearchSectionProps) => {
   const [query, setQuery] = useState("");
   const [isActive, setIsActive] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -22,6 +27,11 @@ const SearchSection = () => {
     try {
       const response = await axios.post<SearchResponse>("http://localhost:5000/api/gemini", { prompt: query });
       setResult(response.data.reply);
+      
+      // Call the onSearchComplete callback to show the personalization section
+      if (onSearchComplete) {
+        onSearchComplete();
+      }
     } catch (error) {
       console.error("Erro ao buscar receita:", error);
       setResult("Erro ao buscar receita. Tente novamente.");
