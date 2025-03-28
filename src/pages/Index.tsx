@@ -13,8 +13,8 @@ const Index = () => {
     setIsLoaded(true);
   }, []);
   
-  // State for result section visibility - in a real app this would be controlled by search submission
-  const [showResults, setShowResults] = useState(false);
+  // State for result section visibility - this will be controlled by search submission
+  const [showResults, setShowResults] = useState(true); // Set to true to show the results section for testing
   
   return (
     <div className={`min-h-screen flex flex-col ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-500`}>
